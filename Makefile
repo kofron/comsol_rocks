@@ -51,7 +51,7 @@ generate-pbs-script:
 	sed 's/\*\*NN\*\*/$(nn)/g' | \
 	sed 's/\*\*NP\*\*/$(np)/g' | \
 	sed 's/\*\*EMAIL\*\*/$(email)/g' | \
-	sed 's/\*\*JOBNAME\*\*/$(jobname)/g' > \
+	sed 's/\*\*JOBNAME\*\*/$(job)/g' > \
 	comsol_rocks_$(job)_$$PPID.pbs
 	@echo output written to: comsol_rocks_$(job)_$$PPID.pbs
 
