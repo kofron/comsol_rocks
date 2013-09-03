@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#PBS -l nodes=**NN**:ppn=**NP**
+#PBS -N comsol_**JOBNAME**
+#PBS -j oe
+#PBS -l walltime=
+#PBS -m abe -M **EMAIL**
+export pbsjobid = `echo $PBS_JOBID | awk -F . '{print $1}'`
+export numprocs = `wc -l < $PBS_NODEFILE`
+
+cd $PBS_O_WORKDIR
+cp $PBS_NODEFILE nodefile.$pbsjobid
+cat nodefile.$pbsjobid | uniq > nodelist 
+
+comsol batch -nn **NN** -mpifabrics shm:tcp -f nodelist -inputfile **MODEL** -outputfile $(echo **MODEL** | sed -e 's/.mph/_result.mph/g') -batchlog **MODEL**.log >& **MODEL**.rocks_out
