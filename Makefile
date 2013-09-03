@@ -47,11 +47,11 @@ endif
 ## directory into a pbs script which will then be submitted via qsub.
 generate-pbs-script: 
 	@cat comsol_rocks.tmpl | \
-	sed -e 's/\*\*MODEL\*\*/$(model)/g' | \
-	sed -e 's/\*\*NN\*\*/$(nn)/g' | \
-	sed -e 's/\*\*NP\*\*/$(np)/g' | \
-	sed -e 's/\*\*EMAIL\*\*/$(email)/g' | \
-	sed -e 's/\*\*JOBNAME\*\*/$(jobname)/g' > \
+	sed 's/\*\*MODEL\*\*/$(model)/g' | \
+	sed 's/\*\*NN\*\*/$(nn)/g' | \
+	sed 's/\*\*NP\*\*/$(np)/g' | \
+	sed 's/\*\*EMAIL\*\*/$(email)/g' | \
+	sed 's/\*\*JOBNAME\*\*/$(jobname)/g' > \
 	comsol_rocks_$(job)_$$PPID.pbs
 	@echo output written to: comsol_rocks_$(job)_$$PPID.pbs
 
